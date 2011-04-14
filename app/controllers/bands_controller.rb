@@ -25,7 +25,7 @@ class BandsController < ApplicationController
   # GET /bands/new.xml
   def new
     @band = Band.new
-
+	authorize! :new, @band
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @band }
@@ -35,13 +35,14 @@ class BandsController < ApplicationController
   # GET /bands/1/edit
   def edit
     @band = Band.find(params[:id])
+	authorize! :update, @band	
   end
 
   # POST /bands
   # POST /bands.xml
   def create
     @band = Band.new(params[:band])
-
+	authorize! :new, @band
     respond_to do |format|
       if @band.save
         format.html { redirect_to(@band, :notice => 'Band was successfully created.') }
@@ -57,7 +58,7 @@ class BandsController < ApplicationController
   # PUT /bands/1.xml
   def update
     @band = Band.find(params[:id])
-
+	authorize! :update, @band
     respond_to do |format|
       if @band.update_attributes(params[:band])
         format.html { redirect_to(@band, :notice => 'Band was successfully updated.') }
@@ -74,7 +75,7 @@ class BandsController < ApplicationController
   def destroy
     @band = Band.find(params[:id])
     @band.destroy
-
+	authorize! :destroy, @band
     respond_to do |format|
       format.html { redirect_to(bands_url) }
       format.xml  { head :ok }
