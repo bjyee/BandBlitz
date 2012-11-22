@@ -1,6 +1,9 @@
 class GenresController < ApplicationController
   # GET /genres
   # GET /genres.xml
+  
+  authorize_resource
+  
   def index
     @genres = Genre.all
 

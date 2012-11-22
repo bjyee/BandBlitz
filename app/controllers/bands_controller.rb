@@ -24,8 +24,8 @@ class BandsController < ApplicationController
   # GET /bands/new
   # GET /bands/new.xml
   def new
+    authorize! :new, @band
     @band = Band.new
-	authorize! :new, @band
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @band }
@@ -41,8 +41,8 @@ class BandsController < ApplicationController
   # POST /bands
   # POST /bands.xml
   def create
-    @band = Band.new(params[:band])
 	authorize! :new, @band
+  @band = Band.new(params[:band])
     respond_to do |format|
       if @band.save
         format.html { redirect_to(@band, :notice => 'Band was successfully created.') }

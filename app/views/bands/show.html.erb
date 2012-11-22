@@ -4,12 +4,12 @@
   <%= @band.name %>
 
 <span class="options">
-	
+		<% if can? :update, Band %>
 		<%= link_to "Edit band", edit_band_path(@band) %> |
-	
-	
+		<% end %>
+		<% if can? :update, Band %>
 		<%= link_to "Remove band", @band, :confirm => 'Are you sure?', :method => :delete %> |
-		
+		<% end %>		
   <%= link_to "View other bands", bands_path %>
 </span>
 </h1>
